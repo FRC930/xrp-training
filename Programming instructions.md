@@ -11,7 +11,7 @@
 [Link to the firmware- use .uf2 (not beta!)](https://github.com/wpilibsuite/xrp-wpilib-firmware/releases)
 
 1. Extract the contents of the firmware ZIP file. You should end up with a .uf2 file.
-2. Plug the XRP into your computer with a Micro-USB cable. You should see a red power LED that lights up.
+2. Plug the XRP into your computer with a USB C cable. You should see a red power LED that lights up.
 3. While holding the BOOTSEL button, quickly press the reset button, and then release the BOOTSEL button.
 4. The board will temporarily disconnect from your computer, and then reconnect as a USB storage device named RPI-RP2.
 5. Drag the .uf2 firmware file into the RPI-RP2 drive, and it will automatically update the firmware.
