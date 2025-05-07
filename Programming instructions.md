@@ -15,7 +15,7 @@
 
 * Grab a USB C data cable.
 * Plug in your USB C cable, and turn on the XRP(the switch is near the power port).
-* Go to  Releases · [WPILib firmware](wpilibsuite/xrp-wpilib-firmware) 
+* Go to  Releases · [WPILib firmware](https://github.com/wpilibsuite/xrp-wpilib-firmware/releases) 
 * Then download the latest file that isn't beta
 * Open the XRP drive that shows up when you plug it in.
 * Drag the file into the XRP drive.
