@@ -5,14 +5,23 @@
 |:---:|:---:|
 |[WPILib instructions](https://docs.wpilib.org/en/stable/docs/xrp-robot/programming-xrp.html)| WPILib instructions for flashing the XRP and creating the project|
 
-## Flashing the board 
+## Flashing the board with WPILib firmware
 **Make sure that you have a USB data cable!**
 
 [Link to the firmware- use .uf2 (not beta!)](https://github.com/wpilibsuite/xrp-wpilib-firmware/releases)
 
-1. Extract the contents of the firmware ZIP file. You should end up with a .uf2 file.
-2. Plug the XRP into your computer with a USB C cable. You should see a red power LED that lights up.
-3. While holding the BOOTSEL button, quickly press the reset button, and then release the BOOTSEL button.
-4. The board will temporarily disconnect from your computer, and then reconnect as a USB storage device named RPI-RP2.
-5. Drag the .uf2 firmware file into the RPI-RP2 drive, and it will automatically update the firmware.
-6. Once complete, the RPI-RP2 USB storage device will disconnect. At this point, you can disconnect the XRP board from your computer and run it off battery power.
+
+
+
+* Grab a USB C data cable.
+* Plug in your USB C cable, and turn on the XRP(the switch is near the power port).
+* Go to  Releases · [WPILib firmware](wpilibsuite/xrp-wpilib-firmware) 
+* Then download the latest file that isn't beta
+* Open the XRP drive that shows up when you plug it in.
+* Drag the file into the XRP drive.
+* Unplug the XRP, and plug it back in. 
+* Connect to the board over Wi-Fi.
+* Next, create a new project in Github as a XRP reference.
+* Then, you need to select the folder you want it in, and then finally input your team number.
+* Make the IP address of wpi.sim.envVar to the IP address given to you by your XRP
+* Deploy your code to make sure that it is connected.
