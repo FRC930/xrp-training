@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import javax.security.auth.x500.X500Principal;
+
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -18,6 +21,7 @@ import edu.wpi.first.wpilibj.xrp.XRPOnBoardIO;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -31,10 +35,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final XRPOnBoardIO m_onboardIO = new XRPOnBoardIO();
+  private final DigitalOutput m_dio1 = new DigitalOutput(12);
   private final Arm m_arm = new Arm();
 
   // Assumes a gamepad plugged into channel 0
-  private final Joystick m_controller = new Joystick(0);
+  private final CommandXboxController m_controller = new CommandXboxController(0);
 
   // Create SmartDashboard chooser for autonomous routines
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -57,21 +62,19 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
     // Example of how to use the onboard IO
-    Trigger userButton = new Trigger(m_onboardIO::getUserButtonPressed);
-    userButton
-        .onTrue(new PrintCommand("USER Button Pressed"))
-        .onFalse(new PrintCommand("USER Button Released"));
+    m_controller.back()
+        .onTrue(new InstantCommand(() -> m_dio1.set(true), m_arm))
+        .onFalse(new InstantCommand(() -> m_dio1.set(false), m_arm));
 
-    JoystickButton joystickAButton = new JoystickButton(m_controller, 1);
-    joystickAButton
+    m_controller.a()
         .onTrue(new InstantCommand(() -> m_arm.setAngle(45.0), m_arm))
         .onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
-
-    JoystickButton joystickBButton = new JoystickButton(m_controller, 2);
-    joystickBButton
+    
+    m_controller.b()
         .onTrue(new InstantCommand(() -> m_arm.setAngle(90.0), m_arm))
         .onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
 
+    
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Auto Routine Distance", new AutonomousDistance(m_drivetrain));
     m_chooser.addOption("Auto Routine Time", new AutonomousTime(m_drivetrain));
@@ -94,6 +97,6 @@ public class RobotContainer {
    */
   public Command getArcadeDriveCommand() {
     return new ArcadeDrive(
-        m_drivetrain, () -> -m_controller.getRawAxis(1), () -> -m_controller.getRawAxis(2));
+        m_drivetrain, () -> -m_controller.getLeftY(), () -> -m_controller.getLeftX());
   }
 }
