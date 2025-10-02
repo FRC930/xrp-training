@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ArmDefaultCommand;
 import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
+import frc.robot.commands.SetAngleCommand;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -48,6 +50,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    m_arm.setDefaultCommand(new ArmDefaultCommand(m_arm));
   }
 
   /**
@@ -67,12 +70,12 @@ public class RobotContainer {
         .onFalse(new InstantCommand(() -> m_dio1.set(false), m_arm));
 
     m_controller.a()
-        .onTrue(new InstantCommand(() -> m_arm.setAngle(45.0), m_arm))
-        .onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
+        .whileTrue(new SetAngleCommand(135.0, m_arm));
+        //.onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
     
     m_controller.b()
-        .onTrue(new InstantCommand(() -> m_arm.setAngle(90.0), m_arm))
-        .onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
+        .whileTrue(new SetAngleCommand(180.0, m_arm));
+        //.onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
 
     
     // Setup SmartDashboard options

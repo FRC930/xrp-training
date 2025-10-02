@@ -29,4 +29,8 @@ public class Arm extends SubsystemBase {
   public void setAngle(double angleDeg) {
     m_armServo.setAngle(angleDeg);
   }
+
+  public void setPosition(double pos){
+    m_armServo.setPosition(pos);
+  }
 }
