@@ -47,4 +47,4 @@ Turning on and running the XRPs vary from how we do the same to a typical FRC Ro
 - A wired Xbox controller (connect to your computer)
 - Batteries--similar to an FRC robot, the XRPs need power via batteries to run. These should already be inside the XRPs.
 2. To turn on the XRP, look for the "on" switch on the red controller board (should be on the outer edge of the board)
-3. You will need to connect to the XRP's wifi. Disconnect from whatever wifi you're currently on, and connect to the XRP's network. The password for the network is "wpilib-xrp"
+3. You will need to connect to the XRP's wifi. Disconnect from whatever wifi you're currently on, and connect to the XRP's network. The password for the network is "xrp-wpilib"
