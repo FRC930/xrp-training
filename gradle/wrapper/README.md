@@ -1,4 +1,4 @@
-# XRP Training!
+# XRP Training!!!
 
 This application will work to continue your Java training in a more FRC-based context using Team 930's XRP robots.
 
@@ -44,7 +44,51 @@ After, from the dropdown menu, select "Open Preview".
 Turning on and running the XRPs vary from how we do the same to a typical FRC Robot.
 ### Hardware:
 1. The only external materials needed to run the XRP are:
-- A wired Xbox controller (connect to your computer)
+- A wired Xbox controller (connect to your computer).
 - Batteries--similar to an FRC robot, the XRPs need power via batteries to run. These should already be inside the XRPs.
-2. To turn on the XRP, look for the "on" switch on the red controller board (should be on the outer edge of the board)
-3. You will need to connect to the XRP's wifi. Disconnect from whatever wifi you're currently on, and connect to the XRP's network. The password for the network is "xrp-wpilib"
+2. To turn on the XRP, look for the "on" switch on the red controller board (should be on the outer edge of the board).
+3. You will need to connect to the XRP's wifi. Disconnect from whatever wifi you're currently on, and connect to the XRP's network. The password for the network is "xrp-wpilib" (NOTE: If deploying new code onto the XRPs, deploy that code before connecting to the XRP's wifi).
+4. Open the WPI command palette (ctrl + shift + p) and select "Simulate Code" (You may have to start typing for the command to appear).
+5. When the sim GUI loads, make sure the selcted controller is the one plugged into your computer.
+6. Select "teleop" to run the XRP. You should be able to control the XRP's movement with the joysticks (be mindful that connection gets laggy the longer the XRP is connected),
+
+## Project Structure and Key Files
+There are a couple important files on the XRP to understand that translate to our FRC robot code
+1. Navigate to the `Robot.java` file (under src/main/java/frc/robot). Skim through the code. What do you think this code is doing? (hint: read the comments)
+
+<details>
+    <summary>What does Robot.java do?</summary>
+
+    - Robot.java deals with all of the behind-the-scenes initializations and defines how the robot behaves in each operational mode (autonomous, teleoperated, disabled, test, and simulation). It contols what the robot is continuously doing while it is running.
+
+    - It does this using the "Periodics" and "Init" methods:
+    --"Init" methods run once when the program starts. For example, "teleopInit()" will be called and run once when the XRPs begin in the teleoperated mode. Usually code within this method will inturrupt previous commands that the robot is running.
+    --"Periodic" methods are run continuously during the program (usually every 20 milliseconds). For example, "teleopPeriodic()" will run continously for as long as the XRP is in the teleoperated mode. Usually code within this method will update controls and reading sensors.
+
+    NOTE: We don't mess with Robot.java very often.
+    
+</details>
+
+2. Navigate to the `RobotContainer.java` file (under src/main/java/frc/robot). Skim through the code. What do you think this code is doing? (hint: read the comments)
+
+<details>
+    <summary>What does RobotContainer.java do?</summary>
+
+    - RobotContainer.java is where we connect the robot's hardware and controls to our code/commands. We spend a lot more time in RobotContainer.java compared to Robot.java
+
+    - A couple important functions of RobotContainer.java:
+    --Creates instances of each of the XRP's subsystems (file lines 38-41) that can be passed to commands
+    --Configures the controller buttons (file lines 62-78). This is where we connect controller buttons (like Y, A, triggers, bumpers) to actual controls. For example, the button binding for 
+    A" in this code sets the XRP's arm to 135 degrees (file lines 72-72) using the SetAngleCommand().
+    --If our XRP performed automonous paths, that logic would be within this file as well (it technically is on file lines 92-94, there just aren't any autos to put into code). On our FRC robots (where we to have autos) this file is where those auto routines would be defined.
+    
+</details>
+
+3. You learned in java training that commands are actions that a robot can perform. Look through the pre-written command file ArmDefaultCommand.java (under src/main/java/frc/robot/commands). How do you think we use this command? (hint: right-click on the constructor in the command  (file line 14) and click "Find all References" to see where it's used)
+
+<details>
+    <summary>Where are commands used?</summary>
+
+    RobotContainer.java! This is where commands are bound to 
+    
+</details>
