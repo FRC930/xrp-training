@@ -54,7 +54,8 @@ Turning on and running the XRPs vary from how we do the same to a typical FRC Ro
 
 ## Project Structure and Key Files
 There are a couple important files on the XRP to understand that translate to our FRC robot code
-1. Navigate to the `Robot.java` file (under src/main/java/frc/robot). Skim through the code. What do you think this code is doing? (hint: read the comments)
+### Robot.java
+- Navigate to the `Robot.java` file (under src/main/java/frc/robot). Skim through the code. What do you think this code is doing? (hint: read the comments)
 
 <details>
     <summary>What does Robot.java do?</summary>
@@ -69,7 +70,8 @@ There are a couple important files on the XRP to understand that translate to ou
     
 </details>
 
-2. Navigate to the `RobotContainer.java` file (under src/main/java/frc/robot). Skim through the code. What do you think this code is doing? (hint: read the comments)
+### RobotContainer.java
+- Navigate to the `RobotContainer.java` file (under src/main/java/frc/robot). Skim through the code. What do you think this code is doing? (hint: read the comments)
 
 <details>
     <summary>What does RobotContainer.java do?</summary>
@@ -78,17 +80,52 @@ There are a couple important files on the XRP to understand that translate to ou
 
     - A couple important functions of RobotContainer.java:
     --Creates instances of each of the XRP's subsystems (file lines 38-41) that can be passed to commands
-    --Configures the controller buttons (file lines 62-78). This is where we connect controller buttons (like Y, A, triggers, bumpers) to actual controls. For example, the button binding for 
-    A" in this code sets the XRP's arm to 135 degrees (file lines 72-72) using the SetAngleCommand().
+    --Configures the controller buttons (file lines 62-78). This is where we connect controller buttons (like Y, A, triggers, bumpers) to actual controls. For example, the button binding for "A" in this code sets the XRP's arm to 135 degrees (file lines 73-74) using the SetAngleCommand().
     --If our XRP performed automonous paths, that logic would be within this file as well (it technically is on file lines 92-94, there just aren't any autos to put into code). On our FRC robots (where we to have autos) this file is where those auto routines would be defined.
     
 </details>
 
-3. You learned in java training that commands are actions that a robot can perform. Look through the pre-written command file ArmDefaultCommand.java (under src/main/java/frc/robot/commands). How do you think we use this command? (hint: right-click on the constructor in the command  (file line 14) and click "Find all References" to see where it's used)
+## Commands
+- You learned in java training that commands are actions that a robot can perform. Look through the pre-written command file ArmDefaultCommand.java (under src/main/java/frc/robot/commands). How do you think we use this command, and where is it used? (hint: right-click on the constructor in the command  (file line 14) and click "Find all References" to see where it's used)
 
 <details>
     <summary>Where are commands used?</summary>
 
-    RobotContainer.java! This is where commands are bound to 
+    RobotContainer.java! This is where the commands we create are bound to controller buttons. For ArmDefaultCommand.java specifically, it is positioned where it is one of the first commands the robot runs when it turns on (file line 54). It is not bound to a button, it happens automatically. Looking into the ArmDefaultCommand.java file, the command sets the XRP's arm to 90 degrees.
     
 </details>
+
+### Lets try using a command:
+
+1. We are going to use the SetAngleCommand to make the arm go to 180 degrees when the controller button "B" is pressed. Look into the SetAngleCommand.java file (under src/main/java/frc/robot/commands). How do you think this command operates? What parameters are we going to have to input into the command to make it do what we want?
+
+<details>
+    <summary>What are our parameters?</summary>
+
+    Our parameters for SetAngleCommand.java is an angle degree (double), and an arm.
+    
+</details>
+
+2. Go back to RobotContainer.java. Under the last button binding currently in code (file lines 73-75), enter down to make space for a new binding. Make sure indenting is correct!
+3. To start a new button binding, call the object (the controller) and which button you want to bind your commands to. Use the pre-written controller bindings as a guide, and try to write the first line of this code segment yourself.
+
+<details>
+    <summary>Check your work in #3 here</summary>
+
+    m_controller.b()
+    
+</details>
+
+4. Now, we need to specify when we want our command to run. While the button is pressed, when it is pressed, or when it isn't pressed. This will act like a boolean (true or false) statement. Use the pre-written controller bindings as a guide, and try to write the specifications for when we want our command to run yourself.
+5. Within our boolean, we want to call our SetAngleCommand.java command, as well as the parameters we specified earlier. Use the pre-written controller bindings as a guide, and try to implement the command and set the correct parameters yourself.
+
+<details>
+    <summary>Check your work in #4-5 here</summary>
+
+    .whileTrue(new SetAngleCommand(180.0, m_arm));
+
+    NOTE: Whats the difference between .whileTrue() and .onTrue()? .whileTrue will only run your command while the button is being pressed. When you release your finger from the button, the command will stop running. .onTrue will continuously run the command after the button is pressed, and will continue to run that command even after the button is released.
+    
+</details>
+
+6. Congrats, you made your own button binding using a command! To test your command, refer to the instructions under "Running the XRPs", make sure to deploy your code onto the XRP before you run the robot, otherwise your code will not run.

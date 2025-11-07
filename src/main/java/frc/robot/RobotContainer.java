@@ -50,6 +50,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    // Sets arm to 90 degrees
     m_arm.setDefaultCommand(new ArmDefaultCommand(m_arm));
   }
 
@@ -72,11 +73,6 @@ public class RobotContainer {
     m_controller.a()
         .whileTrue(new SetAngleCommand(135.0, m_arm));
         //.onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
-    
-    m_controller.b()
-        .whileTrue(new SetAngleCommand(180.0, m_arm));
-        //.onFalse(new InstantCommand(() -> m_arm.setAngle(0.0), m_arm));
-
     
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Auto Routine Distance", new AutonomousDistance(m_drivetrain));
