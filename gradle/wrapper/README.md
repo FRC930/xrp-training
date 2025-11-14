@@ -7,8 +7,8 @@ Content:
 - Branch Creation
 - Robot Operation
 - XRP Project Structure
-- Commands
-- Servo/Arm
+- Subsystems
+- Commands, Button Bindings and The Arm
 - Mini Project
 
 ## For easier reading:
@@ -85,7 +85,23 @@ There are a couple important files on the XRP to understand that translate to ou
     
 </details>
 
-## Commands
+## Subsystems
+Subsystems are some of the most crucial components of our code. They go hand-in-hand with commands, which you will learn about later.
+
+Navigate to the Arm.java subsystem (under src/main/java/frc/robot/subsystems). Lets see where we use subsystems. Find line 10 of Arm.java, right click on the class name (Arm) and find all references. Where is the Arm subsystem used?
+
+<details>
+    <summary> Where are subsystems used?</summary>
+
+    Subsystems are used in two places: Commands and RobotContainer.java
+
+    Commands-> commands use subsystems A LOT. Subsystems tell commands what to do. Subsystems define a physical robot mechanism (like the arm) and the command uses that to define an action for that mechanism to do. Subsystems contain the capabilities of a mechanism and commands contain the instructions! For example, if you look at the ArmDefaultCommand.java (under src/main/java/frc/robot/commands), the object being manipulated in the command (m_arm) is defined as an Arm (the subsystem it pulls from) (file line 13).
+
+    RobotContainer.java-> Like we talked about earlier, RobotContainer.java is where we connect the robot's hardware and controls to our code/commands. We do this with our subsytems and commands. Before we do anything with any mechanisms in RobotContainer.java, we need to create instances of each mechanism (through our subsystems). You can find these instances being created on file lines 38-41 in RobotContainer.java
+    
+</details>
+
+## Commands, Button Bindings & The Arm
 - You learned in java training that commands are actions that a robot can perform. Look through the pre-written command file ArmDefaultCommand.java (under src/main/java/frc/robot/commands). How do you think we use this command, and where is it used? (hint: right-click on the constructor in the command  (file line 14) and click "Find all References" to see where it's used)
 
 <details>
@@ -129,3 +145,14 @@ There are a couple important files on the XRP to understand that translate to ou
 </details>
 
 6. Congrats, you made your own button binding using a command! To test your command, refer to the instructions under "Running the XRPs", make sure to deploy your code onto the XRP before you run the robot, otherwise your code will not run.
+
+## Mini Project
+
+Now that you have a firm grasp on how the XRP's code works, you are going to create a small project with the XRPs. 
+- There are variety of pre-written commands already in the code, such as turning the XRPs to a specific angle, or making them drive a specific distance. Explore some of the commands in the code--there should be comments explaining what each command does. 
+- Your task is to bind a sequence of commands together to make the XRPs accomplish some sort of goal with the press of a button.
+- You do not have to create new commands if you don't want to.
+- You will sequence commands where you bind commands to controls (using .andThen(), .alongWith(), etc to string commands together).
+- You can work on your own, or with other programmers.
+- Have fun and be creative!
+- Some ideas for projects: Making the XRP's drive in a rectangle or polygon, use the arm to pick up something, have the xrp follow a path with its line sensor, etc. For more ideas and details of more complex features on the XRPs, you can reference the XRP documentation.
